@@ -37,6 +37,10 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
+<<<<<<< HEAD
+=======
+# Package.resolved
+>>>>>>> a78b391e10ffd953810db8341597014be3e3665c
 .build/
 
 # CocoaPods
@@ -45,7 +49,11 @@ playground.xcworkspace
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
+<<<<<<< HEAD
 Pods/
+=======
+# Pods/
+>>>>>>> a78b391e10ffd953810db8341597014be3e3665c
 
 # Carthage
 #
@@ -63,6 +71,11 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/Preview.html
+<<<<<<< HEAD
 fastlane/screenshots
 fastlane/test_output
 
+=======
+fastlane/screenshots/**/*.png
+fastlane/test_output
+>>>>>>> a78b391e10ffd953810db8341597014be3e3665c
