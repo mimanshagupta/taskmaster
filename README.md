@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # To Do List in Swift
 
 A To Do List application written in Swift for iOS.
@@ -34,6 +33,3 @@ Tap the left side of task to change its state to completed.
 
 MIT License.
 =======
-# taskmaster
-IT homework
->>>>>>> bd1654cfb2af1cae488ebd39c6ad6a66bb883ade
