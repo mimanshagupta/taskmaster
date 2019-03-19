@@ -1,2 +1,0 @@
-# taskmaster
-IT homework
