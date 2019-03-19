@@ -10,6 +10,7 @@ import UIKit
 
 class ToDoItemTableViewCell: UITableViewCell {
     @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var deadlineLabel: UILabel!
     @IBOutlet weak var taskCompleteSwitch: UISwitch!
     
     var task: ToDoListItem?
@@ -35,12 +36,45 @@ class ToDoItemTableViewCell: UITableViewCell {
     
     func updateLabel() {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: task!.name)
+        let deadline = daysRemaining(deadline: task!.deadline)
+        let attributeString2: NSMutableAttributedString =  NSMutableAttributedString(string: deadline)
         
         if task!.completed {
-            attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            attributeString2.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString2.length))
         }
+        
+        if isItToday(deadline: task!.deadline) {
+            attributeString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSMakeRange(0, attributeString.length))
+            attributeString2.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSMakeRange(0, attributeString2.length))
+        }
+        
         taskNameLabel.attributedText = attributeString
+        deadlineLabel.attributedText = attributeString2
     }
+    
+    func daysRemaining(deadline: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        let deadlineDate = dateFormatter.date(from:deadline)!
+        let today = Date()
+        let days = Calendar.current.dateComponents([Calendar.Component.day], from: today, to: deadlineDate).day ?? 0
+        return "\(days) days remaining"
+    }
+    
+    func isItToday(deadline: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        let deadlineDate = dateFormatter.date(from:deadline)!
+        if Calendar.current.isDateInToday(deadlineDate) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     
     @objc func taskCompleted(completeSwitch: UISwitch) {
         let isCompelete = completeSwitch.isOn

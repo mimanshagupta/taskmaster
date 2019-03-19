@@ -15,6 +15,7 @@ class ToDoListItem: Object {
     //MARK: Properties
     @objc dynamic var id = 0
     @objc dynamic var name: String = ""
+    @objc dynamic var deadline: String = ""
     @objc dynamic var completed: Bool = false
     
     //MARK: Initialization

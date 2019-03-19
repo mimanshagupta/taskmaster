@@ -11,6 +11,7 @@ import os.log
 
 class AddItemViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var taskNameField: UITextField!
+    @IBOutlet weak var deadlineField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var task: ToDoListItem?
@@ -20,6 +21,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         taskNameField.delegate = self
+        deadlineField.delegate = self
         updateSaveButton()
     }
 
@@ -59,6 +61,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         
         task = ToDoListItem()
         task?.name = taskNameField.text!
+        task?.deadline = deadlineField.text!
         task?.completed = false
         task?.save()
     }
