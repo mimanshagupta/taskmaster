@@ -37,6 +37,7 @@ class ToDoItemTableViewCell: UITableViewCell {
     func updateLabel() {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: task!.name)
         let deadline = daysRemaining(deadline: task!.deadline)
+        print(deadline)
         let attributeString2: NSMutableAttributedString =  NSMutableAttributedString(string: deadline)
         
         if task!.completed {

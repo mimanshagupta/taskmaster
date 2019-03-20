@@ -11,18 +11,43 @@ import os.log
 
 class AddItemViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var taskNameField: UITextField!
-    @IBOutlet weak var deadlineField: UITextField!
+    //@IBOutlet weak var deadlineField: UIDatePicker!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var task: ToDoListItem?
+    var deadline: String = "20/03/2019"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         taskNameField.delegate = self
-        deadlineField.delegate = self
+        
+        //removed self bit to make it work for datefield
+        let datePicker: UIDatePicker = UIDatePicker()
+        datePicker.frame = CGRect(x: 20, y: 200, width: self.view.frame.width, height: 200)
+        
+        // Set some of UIDatePicker properties
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.datePickerMode = .date
+        datePicker.backgroundColor = UIColor.white
+        
+        datePicker.addTarget(self, action: #selector(AddItemViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        self.view.addSubview(datePicker)
         updateSaveButton()
+    }
+    
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+        
+        // Create date formatter
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        // Set date format
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        // Apply date format
+        let selectedDate: String = dateFormatter.string(from: sender.date)
+        deadline = selectedDate
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +86,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         
         task = ToDoListItem()
         task?.name = taskNameField.text!
-        task?.deadline = deadlineField.text!
+        task?.deadline = deadline
         task?.completed = false
         task?.save()
     }
